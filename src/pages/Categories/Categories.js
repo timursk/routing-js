@@ -1,3 +1,5 @@
+import CategoriesElement from './Categories.html';
+
 import { images } from '@/data/images';
 
 const splitArr = (arr, chunks) =>[
@@ -49,7 +51,7 @@ export class Categories {
   constructor() {};
 
   async render () {
-    return HomeElement;
+    return CategoriesElement;
   }
 
   async after_render () {};
