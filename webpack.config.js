@@ -70,5 +70,8 @@ module.exports = (env, options) => {
         ? new CopyWebpackPlugin({ patterns: [{ from: './src/static', to: '.' }] })
         : nothing,
     ],
+    experiments: {
+      topLevelAwait: true,
+    },
   };
 };

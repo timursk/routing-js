@@ -1,52 +1,49 @@
-'use strict';
-
 import './styles/style.scss';
 
 import { Home } from './pages/Home';
-import { Categories } from './pages/Categories';
 import { Settings } from './pages/Settings';
-import { Error404 } from './pages/Error404';
+import { Artists } from './pages/Artists';
+import { Pictures } from './pages/Pictures';
+import { Test } from './pages/Test';
 
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-
-import { Utils } from './utils/Utils';
+import Utils from './utils/Utils';
 
 const homeInstance = new Home();
-const settingsSettings = new Settings();
-const categoriesInstance = new Categories();
-const error404Instance = new Error404();
+const settingsInstance = new Settings();
+const artistsInstance = new Artists();
+const picturesInstance = new Pictures();
+const testInstance = new Test();
 
-const headerInstance = new Header();
-const footerInstance = new Footer();
+
+
 
 const routes = {
-  '/': homeInstance,
-  '/settings': settingsSettings,
-  '/categories': categoriesInstance,
-};
-
+    '/': homeInstance,
+    '/settings': settingsInstance,
+    '/artists': artistsInstance,
+    '/pictures': picturesInstance,
+    '/tester/7': testInstance,
+    'artists/game': null,
+    'pictures/game': null,
+}
+document.querySelector('header').innerHTML = await homeInstance.render();
 const router = async () => {
-  const header = null || document.getElementById('header_container');
-  const content = null || document.getElementById('page_container');
-  const footer = null || document.getElementById('footer_container');
+    const header = null || document.querySelector('header');
+    const main = null || document.querySelector('main');
+    const footer = null || document.querySelector('footer');
 
-  header.innerHTML = await headerInstance.render();
-  await headerInstance.after_render();
+    const request = Utils.parseURL();
+    const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.id ? `/${request.id}` : '');
+    const page = routes[parsedURL] ? routes[parsedURL] : 'ERROR';
+    document.body.innerHTML = await page.render();
 
-  footer.innerHTML = await footerInstance.render();
-  await footerInstance.after_render();
+    if (request.id != undefined) {
+        const test = new Utils.Game(request.id); 
+        test.render();
+    }
 
-  const request = Utils.parseRequestURL();
+}
 
-  const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.id ? '/:id' : '') + (request.verb ? `/${request.verb}` : '');
-
-  const page = routes[parsedURL] ? routes[parsedURL] : error404Instance;
-
-  content.innerHTML = await page.render();
-
-  await page.after_render();
-};
 
 window.addEventListener('hashchange', router);
 window.addEventListener('load', router);

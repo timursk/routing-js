@@ -1,11 +1,11 @@
-import SettingsElement from './Settings.html';
+import settingsElement from './settings.html';
 
 export class Settings {
-  constructor() {}
+    constructor() {}
 
-  async render () {
-    return SettingsElement;
-  }
+    async render () {
+        return settingsElement;
+    }
 
-  async after_render () {};
+    async after_render () {};
 }

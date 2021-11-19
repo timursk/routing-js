@@ -1,23 +1,54 @@
 export const Utils = {
-  parseRequestURL: () => {
-    const url = location.hash.slice(1).toLowerCase() || '/';
+    parseURL: () => {
+        const url = location.hash.slice(1).toLowerCase() || '/';
+        const urlArr = url.split('/');
+        const request = {
+            resource: null,
+            id: null,
+        };
 
-    const r = url.split('/');
+        request.resource = urlArr[1];
+        request.id = urlArr[2];
 
-    const request = {
-      resource: null,
-      id: null,
-      verb: null,
-    };
+        return request;
+    },
+    Game: class {
+        constructor(num) {
+            this.startId = num * 10;
+        }
+        static history = [];
+        static answer = (isRight) => {console.log(isRight)};
 
-    request.resource = r[1];
-    request.id = r[2];
-    request.verb = r[3];
+        async render() {
+            Utils.Game.history = [];
+            const img = document.querySelector('.test_game');
+            const answerArr = document.querySelectorAll('.answer');
+            let answerId = Utils.random(0,3);
 
-    return request;
-  },
+            img.src = `./pages/Test/src/${this.startId}.jpg`;
+            Utils.Game.history.push(this.startId);
 
-  sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
-};
+            answerArr.forEach((answer, idx) => {
+                if (idx == answerId) {
+                    answerArr[answerId].innerHTML = `${this.startId}`;
+                    answerArr[answerId].addEventListener('click', () => Utils.Game.answer(true));
+                } else {
+                    let rand =  Utils.random(this.startId, this.startId + 9, true);
+                    Utils.Game.history.push(rand);
+                    answer.innerHTML = `${rand}`;
+                    answer.addEventListener('click', () => Utils.Game.answer(false));
+                }
+            });
+        }
+
+
+    },
+    random: (min, max, check) => {
+        let rand = Math.floor(min + Math.random() * (max + 1 - min));
+        if (check) {
+            return Utils.Game.history.indexOf(rand) == -1 ? rand : Utils.random(min, max, true);
+        } else return rand;
+    }
+}
 
 export default Utils;
