@@ -39,15 +39,28 @@ module.exports = (env, options) => {
         }, {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'resolve-url-loader',
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              }
+            },
           ],
         }, {
           test: /\.(png|svg|jpe?g|gif|ttf)$/,
-          use: {
-            loader: 'file-loader',
-          },
+          use: [
+            'file-loader',
+            'webp-loader'
+          ],
         }, {
           test: /\.html$/,
           use: {
