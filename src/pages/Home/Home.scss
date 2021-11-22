@@ -8,6 +8,10 @@
 }
 
 body {
+    margin: 0px;
+}
+
+.body__main {
     margin: 0;
     background-image: url(../../assets/img/background-mobile.webp);
     background-size: 100% 100%;
@@ -15,7 +19,7 @@ body {
 }
 
 /* header */
-.header-container {
+.header-container__main {
     position: relative;
     display: flex;
     align-items: center;
@@ -24,18 +28,18 @@ body {
     height: 10vh;
 }
 
-.settings {
+.settings__main {
     margin-right: 25px;
 }
 
  /* main */
- .main-container {
+ .main-container__main {
      position: relative;
      width: 100%;
      height: 80vh;
  }
 
- .main-info {
+ .main-info__main {
      position: absolute;
      bottom: 0;
      width: 100%;
@@ -45,7 +49,7 @@ body {
      justify-content: space-between;
  }
 
- .title {
+ .title__main {
     position: relative;
     margin: 0 auto 33px;
     font-size: 3em;
@@ -54,7 +58,7 @@ body {
     line-height: 60px;
 }
 
-.title::before {
+.title__main::before {
     content: '';
     position: absolute;
     display: block;
@@ -66,7 +70,7 @@ body {
     border-radius: 50%;
  }
 
- .title::after {
+ .title__main::after {
     content: '';
     position: absolute;
     display: block;
@@ -78,7 +82,7 @@ body {
     border-radius: 50%;
  }
 
- .main-link {
+ .main-link__main {
      width: 268px;
      margin-bottom: 20px;
      padding: 14px;
@@ -90,20 +94,20 @@ body {
      /* height: 60px; */
  }
 
- .main-link:last-child {
+ .main-link__main:last-child {
      margin-bottom: 0px;
  }
 
  /* footer */
 
- .footer-container {
+ .footer-container__main {
     display: flex;
     align-items: center;
     width: 100%;
     height: 10vh;
  }
 
- .footer-info {
+ .footer-info__main {
     width: 100%;
     margin: 0 12px;
     display: flex;

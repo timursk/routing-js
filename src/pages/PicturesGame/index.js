@@ -1,1 +1,1 @@
-export { Home } from './home'
+export { PicturesGame } from './pictures-game'

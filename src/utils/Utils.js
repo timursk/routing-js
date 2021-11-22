@@ -21,11 +21,11 @@ export const Utils = {
 
         async render() {
             Utils.Game.history = [];
-            const img = document.querySelector('.test_game');
+            // const img = document.querySelector('.test_game');
             const answerArr = document.querySelectorAll('.answer');
             let answerId = Utils.random(0,3);
 
-            img.src = `./pages/Test/src/${this.startId}.jpg`;
+            // img.src = `./pages/Test/src/${this.startId}.jpg`;
             Utils.Game.history.push(this.startId);
 
             answerArr.forEach((answer, idx) => {

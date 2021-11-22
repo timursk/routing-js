@@ -1,0 +1,143 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Gilroy';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    color: white;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+/* answered */
+
+.answered {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.answered-container {
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+}
+
+.answered-img {
+    margin: 10px 10px 10px 10px;
+    height: 190px;
+    border-radius: 20px;
+}
+
+.answered-title {
+    margin: 0px;
+    color: black;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.answered-info {
+    margin-bottom: 10px;
+    color: black;
+    text-align: center;
+}
+
+.next {
+    margin: 0 auto 10px;
+    width: 190px;
+    height: 30px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 60px;
+    color: black;
+    font-weight: 700px;
+}
+
+/* header */
+.header-container__artists-game {
+    margin: 0 15px;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-timeload__artists-game {
+    height: 3px;
+    width: 80%;
+    border-radius: 4.5px;
+    background-color: white;
+}
+
+.game-time__artists-game {
+    font-weight: 700;
+    line-height: 18px;
+}
+
+ /* main */
+ .main-container__artists-game {
+    margin: 0 16px;
+    min-height: 80vh;
+ }
+
+.game-question__artists-game {
+    margin-top: 0%;
+    font-size: 1.5em;
+    line-height: 28px;
+    text-align: center;
+}
+
+.question-img__artists-game {
+    margin-bottom: 25px;
+    width: 100%;
+    height: 294px;
+}
+
+.answers__artists-game {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.answer-button__artists-game {
+    margin-bottom: 10px;
+    width: 158px;
+    height: 48px;
+    background: black;
+    border: 1px solid white;
+    border-radius: 56px;
+}
+
+ /* footer */
+
+ .footer-container__artists-game {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+ }
+
+ .footer-info__artists-game {
+    width: 100%;
+    margin: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }

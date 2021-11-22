@@ -57,14 +57,34 @@ module.exports = (env, options) => {
           ],
         }, {
           test: /\.(png|svg|jpe?g|gif|ttf)$/,
-          use: [
-            'file-loader',
-            'webp-loader'
-          ],
+          loader: 'file-loader',
+          // options: {
+          //   name: '../../[name].[ext]',
+          // },
+          // use: [
+          //   'file-loader',
+          //   'webp-loader'
+          // ],
         }, {
           test: /\.html$/,
           use: {
             loader: 'html-loader',
+            options: {
+              sources: {
+                urlFilter: (attribute, value, resourcePath) => {
+                  // The `attribute` argument contains a name of the HTML attribute.
+                  // The `value` argument contains a value of the HTML attribute.
+                  // The `resourcePath` argument contains a path to the loaded HTML file.
+    
+                  if (/index\.html$/.test(attribute)) {
+                    return true;
+                  }
+    
+                  return false;
+                },
+              },
+            },
+
           },
         },
       ],
@@ -79,9 +99,9 @@ module.exports = (env, options) => {
         template: './src/index.html',
       }),
       isAnalyze ? new BundleAnalyzerPlugin() : nothing,
-      isProduction
-        ? new CopyWebpackPlugin({ patterns: [{ from: './src/static', to: '.' }] })
-        : nothing,
+      // isProduction
+      //   ? new CopyWebpackPlugin({ patterns: [{ from: './src/static', to: '.' }] })
+      //   : nothing,
     ],
     experiments: {
       topLevelAwait: true,
