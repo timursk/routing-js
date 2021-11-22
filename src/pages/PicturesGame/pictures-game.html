@@ -10,7 +10,7 @@
     <div class="body">
         <header class="header__pictures-game">
             <div class="header-container__pictures-game">
-                <a href="/">
+                <a href="#/pictures">
                     <img src="../../assets/svg/game-home.svg" alt="exit">
                 </a>
                 <div class="game-timeload__pictures-game"></div>
@@ -26,21 +26,22 @@
                     <button class="next">Next</button>
                 </div>
             </div>
+            <div class="finish">
+                <div class="finish-container">
+                    <h2 class="finish-title">Congrats! Your result is:</h2>
+                    <span class="finish-result"></span>
+                    <a class="finish-href" href="#/pictures">
+                        <button class="finish-button">Exit</button>
+                    </a>
+                </div>
+            </div>
             <div class="main-container__pictures-game">
                 <h2 class="game-question__pictures-game">Which is <span class="author__pictures-game">Edvard</span> picture?</h2>
                 <div class="answers__pictures-game">
-                    <button class="answer-button__pictures-game">
-                        <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
-                    </button>
-                    <button class="answer-button__pictures-game">
-                        <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
-                    </button>
-                    <button class="answer-button__pictures-game">
-                        <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
-                    </button>
-                    <button class="answer-button__pictures-game">
-                        <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
-                    </button>
+                    <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
+                    <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
+                    <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
+                    <img class="question-img__pictures-game" src="../../assets/img/background-screen.webp" alt="img question">
                 </div>
                 <div class="answers-list__pictures-game">
                     <div class="list-item__pictures-game"></div>
@@ -64,7 +65,9 @@
                     <span>2021</span>
                 </div>
             </div>
-        </footer>    
+        </footer> 
+        <audio class="done audio" src="../../assets/sound/done.mp3"></audio>
+        <audio class="error audio" src="../../assets/sound/error.mp3"></audio>    
     </div>
 </body>
 </html>

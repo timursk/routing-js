@@ -10,7 +10,7 @@
     <div class="body">
         <header class="header__artists-game">
             <div class="header-container__artists-game">
-                <a href="/">
+                <a href="#/artists">
                     <img src="../../assets/svg/game-home.svg" alt="exit">
                 </a>
                 <div class="game-timeload__artists-game"></div>
@@ -24,6 +24,15 @@
                     <h2 class="answered-title">Girl with a pearl</h2>
                     <span class="answered-info">Vanessa, 1995</span>
                     <button class="next">Next</button>
+                </div>
+            </div>
+            <div class="finish">
+                <div class="finish-container">
+                    <h2 class="finish-title">Congrats! Your result is:</h2>
+                    <span class="finish-result"></span>
+                    <a class="finish-href" href="#/artists">
+                        <button class="finish-button">Exit</button>
+                    </a>
                 </div>
             </div>
             <div class="main-container__artists-game">
@@ -45,7 +54,9 @@
                     <span>2021</span>
                 </div>
             </div>
-        </footer>    
+        </footer>
+        <audio class="done audio" src="../../assets/sound/done.mp3"></audio>
+        <audio class="error audio" src="../../assets/sound/error.mp3"></audio>    
     </div>
 </body>
 </html>
