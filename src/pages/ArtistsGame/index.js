@@ -1,0 +1,1 @@
+export { ArtistsGame } from './artists-game'

@@ -1,0 +1,1 @@
+export { PicturesGame } from './pictures-game'
