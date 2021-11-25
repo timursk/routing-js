@@ -183,3 +183,18 @@ body {
     justify-content: space-between;
     align-items: center;
  }
+
+ @media (min-width:560px) {
+    * {
+        font-size: 22px;
+    }
+    .main-info__settings {
+        width: 30%;
+        margin: 0 auto;
+    }
+    .buttons-container__settings {
+        width: 30%;
+        margin: 0 auto;
+    }
+    
+ }

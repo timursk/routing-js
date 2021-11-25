@@ -209,3 +209,38 @@ body {
     justify-content: space-between;
     align-items: center;
  }
+
+ .answers-list__artists-game {
+    margin: 0 auto 20px;
+    width: 50vw;  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+ 
+
+ @media (min-width:560px) {
+    .header__artists-game {
+        margin: 0 300px;
+    }
+    .question-img__artists-game {
+        height: 500px;
+        width: 825px;
+        margin: 0px auto 20px;
+        display: block;
+    }
+    .answers__artists-game {
+        width: 825px;
+        margin: 0 auto;
+    }
+    .answer-button__artists-game {
+        margin-bottom: 20px;
+        width: 49%;
+        height: 62px;
+    }
+    .answers-list__artists-game {
+        margin: 0 auto 30px;
+        width: 350px;
+     }
+    
+ } 

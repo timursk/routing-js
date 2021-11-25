@@ -156,3 +156,30 @@ body {
     justify-content: space-between;
     align-items: center;
  }
+
+ @media (min-width:560px) {
+    .header__pictures-game {
+        margin: 0 300px;
+    }
+    .question-img__pictures-game {
+        margin-bottom: 25px;
+        width: 400px;
+        height: 280px;
+    }
+    .answers__pictures-game {
+        margin: 0 530px;
+    }
+    .answers-list__pictures-game {
+        margin: 0 45vw;
+    }
+    .answered-container {
+        width: 35%;
+        height: 60%;
+    }
+    .answered-img {
+        margin: 30px 30px 15px 30px;
+        border-radius: 20px;
+        height: 75%;
+    }
+    
+ } 

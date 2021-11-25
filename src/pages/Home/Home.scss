@@ -114,3 +114,34 @@ body {
     justify-content: space-between;
     align-items: center;
  }
+
+ @media (min-width:560px) {
+    * {
+        font-size: 22px;
+    }
+    .body__main {
+        margin: 0;
+        background-image: url(../../assets/img/background-screen.webp);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .title__main {
+        font-size: 10em;
+        line-height: 160px;
+    }
+    .main-info__main {
+        bottom: 25%;
+    }
+    .title__main::before {
+        width: 160px;
+        height: 160px;
+        top: calc(50% - 70px);
+    }
+    .title__main::after {
+        width: 160px;
+        height: 160px;
+        top: calc(50% - 70px);
+        left: 40px;
+    }
+    
+ }

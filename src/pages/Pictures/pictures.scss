@@ -117,3 +117,27 @@ body {
      align-items: center;
      text-decoration: none;
  }
+
+ @media (min-width:560px) {
+    .categories__pictures {
+        display: flex;
+        column-gap: 80px;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: 100%;
+        margin: 0 70px;
+    }
+    .categories-title__pictures {
+        margin: 28px 70px 50px;
+    }
+    .item-img__pictures {
+        width: 195px;
+        height: 205px;
+    }
+    .categories-item__pictures {
+        width: 195px;
+        height: 235px;
+    }
+ }

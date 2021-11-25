@@ -12,9 +12,6 @@ export const Utils = {
 
         return request;
     },
-    idToGame: (id) => {
-        
-    },
     Game: class {
         constructor(num, json) {
             this.startId = num * 10;
@@ -25,19 +22,21 @@ export const Utils = {
         static result = 0;
         static async loadImg(img, src) {
             img.src = src;
-            img.onload = () => {console.log('loaded')};
+            // img.onload = () => {console.log('loaded')};
         };
         static answer = async (isRight, id, startId, json) => {
             this.result += isRight ? 1 : 0;
-            console.log('res is ', this.result);
-            console.log('img number ', id);
-            console.log(Utils.Settings.sound());
+            // console.log('res is ', this.result);
+            // console.log('img number ', id);
+            // console.log(Utils.Settings.sound());
             const form = document.querySelector('.answered');
             const img = document.querySelector('.answered-img');
             const title = document.querySelector('.answered-title');
             const span = document.querySelector('.answered-info');
             const done = document.querySelector('.done');
             const error = document.querySelector('.error');
+            const circles = document.querySelectorAll('.list-item__pictures-game');
+            circles[id - startId].style.background = isRight ? 'green' : 'red';
 
             isRight ? done.play() : error.play();
             form.classList.add('visible');
@@ -61,12 +60,12 @@ export const Utils = {
                     result.innerHTML = this.result;
 
                     let rez = localStorage.getItem(`${startId / 10}record`);
-                    console.log('rez from local', rez);
+                    // console.log('rez from local', rez);
                     if (rez!==undefined && rez < this.result || rez == null) {
                         localStorage.setItem(`${startId / 10}record`, this.result);
                     }
-                    console.log('STOP THIS', this.result);
-                    console.log(finish);
+                    // console.log('STOP THIS', this.result);
+                    // console.log(finish);
                     
                 }
                 id = id + 1;
@@ -92,7 +91,7 @@ export const Utils = {
             await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
             // img.src = `https://raw.githubusercontent.com/irinainina/image-data/master/img/${id}.jpg`;
             Utils.Game.history.push(id);
-            console.log('start ', startId);
+            // console.log('start ', startId);
             answerArr.forEach((answer, idx) => {
                 if (idx == answerId) {
                     answerArr[answerId].innerHTML = `${json[id].author}`;
@@ -130,15 +129,17 @@ export const Utils = {
         static result = 0;
         static async loadImg(img, src) {
             img.src = src;
-            img.onload = () => {console.log('loaded')};
+            // img.onload = () => {console.log('loaded')};
         };
 
         static answer = async (isRight, id, startId, json) => {
             this.result += isRight ? 1 : 0;
-            console.log('res is ', this.result);
-            console.log('img number ', id);
-            console.log(Utils.Settings.sound());
+            // console.log('res is ', this.result);
+            // console.log('img number ', id);
+            // console.log(Utils.Settings.sound());
 
+            const circles = document.querySelectorAll('.list-item__pictures-game');
+            circles[id - startId].style.background = isRight ? 'green' : 'red';
             const form = document.querySelector('.answered');
             const img = document.querySelector('.answered-img');
             const title = document.querySelector('.answered-title');
@@ -170,13 +171,13 @@ export const Utils = {
                     result.innerHTML = this.result;
 
                     let rez = localStorage.getItem(`${startId / 10}record`);
-                    console.log('startId / 10 ', startId / 10);
-                    console.log('rez from local', rez);
+                    // console.log('startId / 10 ', startId / 10);
+                    // console.log('rez from local', rez);
                     if (rez!==undefined && rez < this.result || rez == null) {
                         localStorage.setItem(`${startId / 10}record`, this.result);
                     }
-                    console.log('STOP THIS', this.result);
-                    console.log(finish);
+                    // console.log('STOP THIS', this.result);
+                    // console.log(finish);
                     
                 }
                 id = id + 1;
@@ -197,8 +198,9 @@ export const Utils = {
             let answerId = Utils.randomPictures(0,3);
             Utils.GamePictures.history.push(id);
 
-            
-            console.log('start ', startId);
+            const quest = document.querySelector('.author__pictures-game');
+            quest.innerHTML = json[id].author;
+            // console.log('start ', startId);
             imgArr.forEach((answer, idx) => {
                 if (idx == answerId) {
                     Utils.GamePictures.loadImg(answer, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
@@ -246,7 +248,7 @@ export const Utils = {
                 let audios = document.querySelectorAll('.audio');
                 audios.forEach((sound) => {
                     sound.muted = isMuted ? true : false;
-                    console.log(sound.volume);
+                    // console.log(sound.volume);
                 });
 
                 const imgOff = document.querySelector('.volume-imgs-off__settings');
@@ -298,6 +300,7 @@ export const Utils = {
             let vol = ev.srcElement.value;
             audios.forEach((audio) => {
                 audio.volume = vol / 100;
+                audio.muted = false;
             });
             localStorage.setItem('volume', vol / 100);
             console.log(done.muted);
@@ -349,7 +352,7 @@ export const Utils = {
     setRecordsArtists() {
         const arr = document.querySelectorAll('.item-record__artists');
         arr.forEach((item, idx) => {
-            console.log(idx);
+            // console.log(idx);
             if (localStorage.getItem(`${idx}record`)) {
                 item.innerHTML = localStorage.getItem(`${idx}record`) + `/10`;
             }
