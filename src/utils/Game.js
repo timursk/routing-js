@@ -1,5 +1,3 @@
-import GameArtists from "./GameArtists";
-
 export default class Game {
     history = [];
     result = 0;
@@ -8,7 +6,10 @@ export default class Game {
         this.startId = startId * 10;
         this.step = startId * 10;
         this.json = json;
-        this.selector = {
+    }
+
+    get selector() {
+        return {
             circles : document.querySelectorAll('.list-item__pictures-game'),
             form    : document.querySelector('.answered'),
             img     : document.querySelector('.answered-img'),
@@ -23,10 +24,10 @@ export default class Game {
         }
     }
 
-    random(min, max) {
+    random(min, max, toCheck) {
         let rand = Math.floor(min + Math.random() * (max + 1 - min));
-        rand = this.history.includes(rand) ? this.random(min, max) : rand;
-        this.history.push(rand);
+        if (toCheck && this.history.includes(rand)) return this.random(min,max, true);
+        if (toCheck) this.history.push(rand);
         return rand;
     }
 
@@ -38,10 +39,7 @@ export default class Game {
         });
     }
 
-    async render(answers, answerId, func) {
-        if (this.step - this.startId !== 0) document.body.innerHTML = document.body.innerHTML;
-        console.log(this.selector.answers);
-        
+    async render(answers, answerId, func) {        
         answers.forEach((answer, idx) => {
             if (idx == answerId) func.call(this, true, idx);
             else func.call(this, false, idx);
@@ -60,7 +58,6 @@ export default class Game {
     }
 
     async completeStep(answers) {
-        console.log('URAAAAAAAAAAAAAAAAAAAAAAAAAA');
         if (this.step == this.startId + 9) {
             this.selector.finish.classList.add('visible');
             this.selector.result.innerHTML = this.result;
