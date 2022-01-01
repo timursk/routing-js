@@ -1,20 +1,19 @@
+const MULTIPLIER = 10;
+const LINK = 'https://raw.githubusercontent.com/timursk/image-data/master/img/';
 export const Utils = {
     parseURL: () => {
         const url = location.hash.slice(1).toLowerCase() || '/';
         const urlArr = url.split('/');
         const request = {
-            resource: null,
-            id: null,
+            resource: urlArr[1],
+            id: urlArr[2],
         };
-
-        request.resource = urlArr[1];
-        request.id = urlArr[2];
 
         return request;
     },
     Game: class {
         constructor(num, json) {
-            this.startId = num * 10;
+            this.startId = num * MULTIPLIER;
             this.id = this.startId;
             this.json = json;
         }
@@ -22,13 +21,9 @@ export const Utils = {
         static result = 0;
         static async loadImg(img, src) {
             img.src = src;
-            // img.onload = () => {console.log('loaded')};
         };
         static answer = async (isRight, id, startId, json) => {
             this.result += isRight ? 1 : 0;
-            // console.log('res is ', this.result);
-            // console.log('img number ', id);
-            // console.log(Utils.Settings.sound());
             const form = document.querySelector('.answered');
             const img = document.querySelector('.answered-img');
             const title = document.querySelector('.answered-title');
@@ -41,8 +36,7 @@ export const Utils = {
             isRight ? done.play() : error.play();
             form.classList.add('visible');
             form.style.background = isRight ? `rgba(0, 255, 0, 80%)` : `rgba(255, 0, 0, 80%)`;
-            // await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/irinainina/image-data/master/img/${id}.jpg`);
-            await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
+            await Utils.Game.loadImg(img, `${LINK}${id}.webp`);
             title.innerHTML = json[id].author;
             span.innerHTML = `${json[id].name}, ${json[id].year}`;
             const next = document.querySelector('.next');
@@ -53,20 +47,16 @@ export const Utils = {
 
 
             function doNext() {
-                if (id == startId + 9) {
+                if (id === startId + 9) {
                     const finish = document.querySelector('.finish');
                     const result = document.querySelector('.finish-result');
                     finish.classList.add('visible');
                     result.innerHTML = this.result;
 
-                    let rez = localStorage.getItem(`${startId / 10}record`);
-                    // console.log('rez from local', rez);
-                    if (rez!==undefined && rez < this.result || rez == null) {
-                        localStorage.setItem(`${startId / 10}record`, this.result);
+                    let rez = localStorage.getItem(`${startId / MULTIPLIER}record`);
+                    if (rez!==undefined && rez < this.result || rez === null) {
+                        localStorage.setItem(`${startId / MULTIPLIER}record`, this.result);
                     }
-                    // console.log('STOP THIS', this.result);
-                    // console.log(finish);
-                    
                 }
                 id = id + 1;
                 this.prototype.render(id, startId, json);
@@ -78,7 +68,7 @@ export const Utils = {
             let arrOfSound = document.querySelectorAll('.audio');
             arrOfSound.forEach((sound) => {
                 sound.volume = +Utils.Settings.sound().volume;
-                sound.muted =  Utils.Settings.sound().isMuted == 'true' ? true : false;
+                sound.muted =  Utils.Settings.sound().isMuted === 'true' ? true : false;
             });
 
             Utils.Game.history = [];
@@ -86,14 +76,10 @@ export const Utils = {
             const answerArr = document.querySelectorAll('.answer-button__artists-game');
             let answerId = Utils.random(0,3);
 
-
-            // await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/irinainina/image-data/master/img/${id}.jpg`);
-            await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
-            // img.src = `https://raw.githubusercontent.com/irinainina/image-data/master/img/${id}.jpg`;
+            await Utils.Game.loadImg(img, `${LINK}${id}.webp`);
             Utils.Game.history.push(id);
-            // console.log('start ', startId);
             answerArr.forEach((answer, idx) => {
-                if (idx == answerId) {
+                if (idx === answerId) {
                     answerArr[answerId].innerHTML = `${json[id].author}`;
                     answerArr[answerId].addEventListener('click', () => Utils.Game.answer(true, id, startId, json));
                 } else {
@@ -110,18 +96,18 @@ export const Utils = {
     random: (min, max, check) => {
         let rand = Math.floor(min + Math.random() * (max + 1 - min));
         if (check) {
-            return Utils.Game.history.indexOf(rand) == -1 ? rand : Utils.random(min, max, true);
+            return Utils.Game.history.indexOf(rand) === -1 ? rand : Utils.random(min, max, true);
         } else return rand;
     },
     randomPictures: (min, max, check) => {
         let rand = Math.floor(min + Math.random() * (max + 1 - min));
         if (check) {
-            return Utils.GamePictures.history.indexOf(rand) == -1 ? rand : Utils.randomPictures(min, max, true);
+            return Utils.GamePictures.history.indexOf(rand) === -1 ? rand : Utils.randomPictures(min, max, true);
         } else return rand;
     },
     GamePictures: class {
         constructor(num, json) {
-            this.startId = num * 10;
+            this.startId = num * MULTIPLIER;
             this.id = this.startId;
             this.json = json;
         }
@@ -129,14 +115,10 @@ export const Utils = {
         static result = 0;
         static async loadImg(img, src) {
             img.src = src;
-            // img.onload = () => {console.log('loaded')};
         };
 
         static answer = async (isRight, id, startId, json) => {
             this.result += isRight ? 1 : 0;
-            // console.log('res is ', this.result);
-            // console.log('img number ', id);
-            // console.log(Utils.Settings.sound());
 
             const circles = document.querySelectorAll('.list-item__pictures-game');
             circles[id - startId].style.background = isRight ? 'green' : 'red';
@@ -150,8 +132,7 @@ export const Utils = {
             isRight ? done.play() : error.play();
             form.classList.add('visible');
             form.style.background = isRight ? `rgba(0, 255, 0, 80%)` : `rgba(255, 0, 0, 80%)`;
-            // await Utils.Game.loadImg(img, `https://raw.githubusercontent.com/irinainina/image-data/master/img/${id}.jpg`);
-            await Utils.GamePictures.loadImg(img, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
+            await Utils.GamePictures.loadImg(img, `${LINK}${id}.webp`);
             title.innerHTML = json[id].author;
             span.innerHTML = `${json[id].name}, ${json[id].year}`;
 
@@ -164,21 +145,16 @@ export const Utils = {
 
 
             function doNext() {
-                if (id == startId + 9) {
+                if (id === startId + 9) {
                     const finish = document.querySelector('.finish');
                     const result = document.querySelector('.finish-result');
                     finish.classList.add('visible');
                     result.innerHTML = this.result;
 
-                    let rez = localStorage.getItem(`${startId / 10}record`);
-                    // console.log('startId / 10 ', startId / 10);
-                    // console.log('rez from local', rez);
-                    if (rez!==undefined && rez < this.result || rez == null) {
-                        localStorage.setItem(`${startId / 10}record`, this.result);
+                    let rez = localStorage.getItem(`${startId / MULTIPLIER}record`);
+                    if (rez!==undefined && rez < this.result || rez === null) {
+                        localStorage.setItem(`${startId / MULTIPLIER}record`, this.result);
                     }
-                    // console.log('STOP THIS', this.result);
-                    // console.log(finish);
-                    
                 }
                 id = id + 1;
                 this.prototype.render(id, startId, json);
@@ -190,7 +166,7 @@ export const Utils = {
             let arrOfSound = document.querySelectorAll('.audio');
             arrOfSound.forEach((sound) => {
                 sound.volume = +Utils.Settings.sound().volume;
-                sound.muted =  Utils.Settings.sound().isMuted == 'true' ? true : false;
+                sound.muted =  Utils.Settings.sound().isMuted === 'true' ? true : false;
             });
 
             Utils.GamePictures.history = [];
@@ -200,15 +176,14 @@ export const Utils = {
 
             const quest = document.querySelector('.author__pictures-game');
             quest.innerHTML = json[id].author;
-            // console.log('start ', startId);
             imgArr.forEach((answer, idx) => {
-                if (idx == answerId) {
-                    Utils.GamePictures.loadImg(answer, `https://raw.githubusercontent.com/timursk/image-data/master/img/${id}.webp`);
+                if (idx === answerId) {
+                    Utils.GamePictures.loadImg(answer, `${LINK}${id}.webp`);
                     answer.addEventListener('click', () => Utils.GamePictures.answer(true, id, startId, json));
                 } else {
                     let rand = Utils.randomPictures(startId, startId + 9, true);
                     Utils.GamePictures.history.push(rand);
-                    Utils.GamePictures.loadImg(answer, `https://raw.githubusercontent.com/timursk/image-data/master/img/${rand}.webp`);
+                    Utils.GamePictures.loadImg(answer, `${LINK}${rand}.webp`);
                     answer.addEventListener('click', () => Utils.GamePictures.answer(false, id, startId, json));
                 }
             });
@@ -248,29 +223,24 @@ export const Utils = {
                 let audios = document.querySelectorAll('.audio');
                 audios.forEach((sound) => {
                     sound.muted = isMuted ? true : false;
-                    // console.log(sound.volume);
                 });
 
                 const imgOff = document.querySelector('.volume-imgs-off__settings');
                 const imgOn = document.querySelector('.volume-imgs-on__settings');
                 const input = document.querySelector('.volume-range__settings');
 
-                if (isMuted == 'true') {
+                if (isMuted === 'true') {
                     imgOn.style.filter = "none";
                     imgOff.style.filter = "invert(34%) sepia(88%) saturate(4311%) hue-rotate(203deg) brightness(102%) contrast(105%)";
                     input.disabled = true;
                 } 
 
-                if (isMuted == 'false') {
+                if (isMuted === 'false') {
                     imgOn.style.filter = "invert(34%) sepia(88%) saturate(4311%) hue-rotate(203deg) brightness(102%) contrast(105%)";
                     imgOff.style.filter = "none";
                     input.disabled = false;
                 }
             }
-
-
-            // localStorage.getItem('timeGame');
-            // localStorage.getItem('time');
         }
         addEvents() {
             const input = document.querySelector('.volume-range__settings');
@@ -284,7 +254,6 @@ export const Utils = {
             const done = document.querySelector('.done');
             const error = document.querySelector('.error');
             const defaultSettings = document.querySelector('.buttons-default__settings');
-
             input.addEventListener('input', (ev) => this.playDone(ev, done));
             imgOff.addEventListener('click', () => this.soundOnOff(false, imgOff, imgOn));
             imgOn.addEventListener('click', () => this.soundOnOff(true, imgOn, imgOff));
@@ -292,7 +261,6 @@ export const Utils = {
             timeMinus.addEventListener('click', () => this.changeTime(false, timeText));
             timePlus.addEventListener('click', () => this.changeTime(true, timeText));
             defaultSettings.addEventListener('click', () => this.goDefault(input, timeIsOn, timeSwitch, timeText, imgOff, imgOn));
-
         }
 
         playDone(ev, done) {
@@ -303,7 +271,6 @@ export const Utils = {
                 audio.muted = false;
             });
             localStorage.setItem('volume', vol / 100);
-            console.log(done.muted);
             done.play();
         }
 
@@ -316,20 +283,18 @@ export const Utils = {
                 sound.muted = bool ? false : true;
             });
             input.disabled = bool ? false : true;
-            console.log('sound is ', audios[0].muted);
             localStorage.setItem('isMuted', audios[0].muted);
         }
 
         switch(item, timeIsOn) {
             item.classList.toggle('clicked');
-            timeIsOn.innerHTML = timeIsOn.innerHTML == 'Off' ? 'On' : 'Off';
-            localStorage.setItem('timeGame', timeIsOn.innerHTML == 'Off' ? false : true);
+            timeIsOn.innerHTML = timeIsOn.innerHTML === 'Off' ? 'On' : 'Off';
+            localStorage.setItem('timeGame', timeIsOn.innerHTML === 'Off' ? false : true);
         }
 
         changeTime(bool, timeText) {
             let num = +timeText.innerHTML;
-            num += bool ? 1 : -1;
-            timeText.innerHTML = num;
+            timeText.innerHTML = num + (bool ? 1 : -1);
             localStorage.setItem('time', num);
         }
 
@@ -352,9 +317,8 @@ export const Utils = {
     setRecordsArtists() {
         const arr = document.querySelectorAll('.item-record__artists');
         arr.forEach((item, idx) => {
-            // console.log(idx);
             if (localStorage.getItem(`${idx}record`)) {
-                item.innerHTML = localStorage.getItem(`${idx}record`) + `/10`;
+                item.innerHTML = `${localStorage.getItem(`${idx}record`)}/10`;
             }
         });
     },
@@ -363,7 +327,7 @@ export const Utils = {
         arr.forEach((item, idx) => {
             idx = idx + 12;
             if (localStorage.getItem(`${idx}record`)) {
-                item.innerHTML = localStorage.getItem(`${idx}record`) + `/10`;
+                item.innerHTML = `${localStorage.getItem(`${idx}record`)}/10`;
             }
         });
     },

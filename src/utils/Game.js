@@ -51,7 +51,6 @@ export default class Game {
         this.result += isRight ? 1 : 0;
         this.selector.form.classList.add('visible');
         this.selector.form.style.background = isRight ? `rgba(0, 255, 0, 80%)` : `rgba(255, 0, 0, 80%)`;
-        console.log('Step is', this.step);
         this.selector.title.innerHTML = this.json[this.step].author;
         this.selector.span.innerHTML = `${this.json[this.step].name}, ${this.json[this.step].year}`;
         this.selector.img.src = this.url;
