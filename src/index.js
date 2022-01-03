@@ -1,5 +1,6 @@
 import './styles/style.scss';
 
+
 import { Home } from './pages/Home';
 import { Settings } from './pages/Settings';
 import { Artists } from './pages/Artists';

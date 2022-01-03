@@ -59,6 +59,13 @@ module.exports = (env, options) => {
         }, {
           test: /\.(png|svg|jpe?g|gif|ttf)$/,
           loader: 'file-loader',
+          // options: {
+          //   name: '../../[name].[ext]',
+          // },
+          // use: [
+          //   'file-loader',
+          //   'webp-loader'
+          // ],
         }, {
           test: /\.html$/,
           use: {
@@ -93,6 +100,9 @@ module.exports = (env, options) => {
         template: './src/index.html',
       }),
       isAnalyze ? new BundleAnalyzerPlugin() : nothing,
+      // isProduction
+      //   ? new CopyWebpackPlugin({ patterns: [{ from: './src/static', to: '.' }] })
+      //   : nothing,
     ],
     experiments: {
       topLevelAwait: true,
